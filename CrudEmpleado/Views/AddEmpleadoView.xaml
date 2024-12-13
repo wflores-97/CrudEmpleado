@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CrudEmpleado.Views.AddEmpleadoView"
+             xmlns:viewModel="clr-namespace:CrudEmpleado.ViewModels"
+             x:DataType="viewModel:AddEmpleadoViewModel"
+             Title="Agregar / Editar Empleado">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="5">
+
+            <Label Text="Nombre Completo"/>
+            <Entry Text="{Binding Nombre}" Keyboard="Text"/>
+
+            <Label Text="Email"/>
+            <Entry Text="{Binding Correo}" Keyboard="Email"/>
+
+            <Label Text="Salario"/>
+            <Entry Text="{Binding Salario}" Keyboard="Numeric"/>
+
+            <Label Text="fecha"/>
+            <DatePicker MinimumDate="01/01/1990"
+                    Date="{Binding Fecha}" />
+
+            <Button Text="Guardar" Command="{Binding addUpdateCommand}"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CrudEmpleado.Views.MainEmpleadoView"
+             xmlns:viewModel="clr-namespace:CrudEmpleado.ViewModels"
+             x:DataType="viewModel:MainEmpleadoViewModel"
+             xmlns:model="clr-namespace:CrudEmpleado.Models"
+             Title="Registro de Empleados">
+
+    <Grid RowDefinitions="Auto, Auto,*" RowSpacing="15" Margin="15">
+        <Button Text="Agregar Empleado" Command="{Binding GotoAddEmpleadoViewCommand}" Grid.Row="0"/>
+        <Label Text="Lista de Empleados" Grid.Row="1" FontSize="Subtitle" Margin="10"/>
+        <ScrollView Grid.Row="2">
+
+            <CollectionView ItemsSource="{Binding EmpleadoCollection}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Tareas">
+
+                        <Border Padding="10,5" HorizontalOptions="FillAndExpand">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+
+                            <Grid RowSpacing="0" RowDefinitions="Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="Auto,*">
+
+                                <Label Grid.Row="0" Grid.Column="0"
+                                   Text="Nombre Completo" FontAttributes="Bold"/>
+                                <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End"
+                                   Text="{Binding Nombre}" />
+
+                                <Label Grid.Row="1" Grid.Column="0"
+                                   Text="Email" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End"
+                                   Text="{Binding Correo}" />
+
+                                <Label Grid.Row="2" Grid.Column="0"
+                                   Text="Salario" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Grid.Column="1" HorizontalOptions="End"
+                                   Text="{Binding salario}" />
+
+                                <Label Grid.Row="3" Grid.Column="0"
+                                   Text="Fecha de Contratación" FontAttributes="Bold"/>
+                                <Label Grid.Row="3" Grid.Column="1" HorizontalOptions="End"
+                                   Text="{Binding Fecha}" />
+
+
+                                <Label Grid.Row="4" Grid.Column="0" Padding="0,15,10,5"
+                                   Text="Editar" TextColor="Blue">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModel:MainEmpleadoViewModel}},Path=selectActualizarEmpleadoCommand}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Grid.Row="4" Grid.Column="1" Padding="10,15,0,5"
+                                   Text="Eliminar" TextColor="Red" HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModel:MainEmpleadoViewModel}},Path=selectEliminarEmpleadoCommand}" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
